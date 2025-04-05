@@ -24,13 +24,22 @@ func enableOrUpdatePages(client *github.Client, owner, repo, branch, path string
 		Branch: github.String(branch),
 		Path:   github.String(path),
 	}
-	opt := &github.Pages{
+	enableOpts := &github.Pages{
 		Source: source,
 	}
 
-	_, resp, err := client.Repositories.EnablePages(ctx, owner, repo, opt)
+	updateOpts := &github.PagesUpdate{
+		Source: source,
+	}
+
+	_, resp, err := client.Repositories.EnablePages(ctx, owner, repo, enableOpts)
 	if err != nil {
-		return fmt.Errorf("failed to enable/update Pages: %v (%v)", err, resp.Status)
+		fmt.Println("ℹ️ Pages already enabled. Updating instead")
+		_, err := client.Repositories.UpdatePages(ctx, owner, repo, updateOpts)
+		if err != nil {
+			return fmt.Errorf("failed to enable/update Pages: %v (%v)", err, resp.Status)
+		}
+
 	}
 
 	fmt.Println("✅ GitHub Pages enabled or updated")
