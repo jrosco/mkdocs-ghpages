@@ -1,0 +1,3 @@
+#!/bin/bash
+
+.venv/bin/mkdocs "$@" || echo ".venv not found, install with ./pyinstall.sh first"

@@ -1,0 +1,25 @@
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[project]
+name = "example-python-reference"
+version = "0.1.0"
+description = ""
+authors = [{ name = "jrosco", email = "j12d@jroso.co" }]
+readme = "docs/reference/python-example.md"
+requires-python = ">=3.11"
+dependencies = [
+    "mkdocs>=1.6",
+    "mkdocs-material>=9.5",
+    "mike>=2.0",
+    "mkdocstrings[python]>=0.18",
+    "mkdocs-jupyter>=0.25.1",
+    "matplotlib",
+    "pandas",
+    "ipywidgets",
+]
+
+# Define where the package is located when using pip with a `src/` structure
+[tool.packaging]
+packages = [{ include = "example_python_reference", from = "src" }]

@@ -1,0 +1,78 @@
+site_name: Exmaple MKDocs Site Managed by GH-Pages
+site_description: Documentation
+site_author: Joel Cumberland
+site_url: https://jrosco.github.io/mkdocs-ghpages/
+
+repo_name: jrosco/mkdocs-ghpages
+repo_url: https://github.com/jrosco/mkdocs-ghpages
+
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.sections
+    - navigation.tabs
+    - content.code.copy
+  palette:
+    # Palette toggle for light mode.
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue
+      accent: light blue
+      toggle:
+        icon: material/brightness-2
+        name: Switch to dark mode
+    # Palette toggle for dark mode.
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-5
+        name: Switch to light mode
+      primary: black
+      accent: light blue
+
+extra_javascript:
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+extra:
+  version:
+    provider: mike
+    alias: true
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - tables
+  - admonition
+  - codehilite
+  - footnotes
+  - attr_list
+  - pymdownx.arithmatex:  # for math
+      generic: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: numpy
+            heading_level: 3
+            show_symbol_type_toc: true
+            show_root_full_path: true
+            show_root_heading: true
+  - mike:
+      canonical_version: latest
+  - mkdocs-jupyter:
+      ignore: ["docs/hooks.py"]
+
+docs_dir: docs
+
+hooks:
+  - docs/hooks.py

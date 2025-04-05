@@ -1,0 +1,5 @@
+mkdocs-ghpages
+site/
+dist/
+__pycache__/
+.venv
